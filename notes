@@ -1,0 +1,54 @@
+*************************************************************
+MUTATORS USE SETATTRIBUTE
+
+	public function setFirstNameAttribute($value) { //first_name
+        $this->attributes['first_name'] = ucfirst($value);
+    }
+
+*************************************************************
+ACCESSORS USE GETATTRIBUTE
+
+	public function getCreatedAtAttribute($value){   //created_at
+        $formatted = new Carbon($value);
+        return $formatted->diffForHumans();
+//        return $formatted->format('d/m/Y G:i:s');
+    }
+
+*************************************************************
+SAVING NOTE WITH SPECIFIC CARD
+	$note = new Note;
+    $note->body =$request->body;
+    $card->notes()->save($note) // saving the specific card_id to that note
+    
+    redirect back();
+
+*************************************************************
+VALIDATE ARRAYS
+
+	$this->validate($request,[
+		'email.*' => 'required|email'
+	],[
+		'email.*' => 'Please enter a valid email adress'
+	]);
+	
+	return 'validation OK';
+
+*************************************************************
+ADDING VALID PERIOD FOR DATE ( +3 month TILL EXPIRE for example)
+	$created_at =  '2010-01-08 12:34:56 ';
+	
+	$d=strtotime($created_at. "+3 Months");
+	echo date("Y-m-d H:i:s", $d) . "<br>";
+
+EACH MONDAY FOR 6 WEEKS
+	$startdate=strtotime("Saturday");
+	$enddate=strtotime("+6 weeks", $startdate);
+	
+	while ($startdate < $enddate) {
+	  echo date("M d", $startdate) . "<br>";
+	  $startdate = strtotime("+1 week", $startdate);
+	}
+*************************************************************
+https://www.youtube.com/watch?v=v222Dtz7jm0
+	
+	https://www.sitepoint.com/phpstorm-top-productivity-hacks-shortcuts/
